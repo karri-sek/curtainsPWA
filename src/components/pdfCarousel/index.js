@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as Icon from 'react-feather';
 import PdfViewer from '../../components/pdfViewer';
+import MyApp from '../pdfViewer/MyApp';
 function PdfCarousel({ documents, removeOverlay, pdfSlice }) {
   const [open, setOpen] = React.useState(true);
   const [activePdfUrl, setActivePdfUrl] = React.useState(undefined);
@@ -24,21 +25,18 @@ function PdfCarousel({ documents, removeOverlay, pdfSlice }) {
     await setDocumentURL(documents[imageIndex - 1].url);
   };
   return (
-    <div className="overlay">
-      {!openPDFViewer && (
-        <button type="button" className="overlay-close" onClick={e => removeOverlay()}>
-          Close
-        </button>
-      )}
-      {openPDFViewer && (
-        <PdfViewer
-          fileURL={activePdfUrl}
-          closePreview={() => {
-            setOpenPDFViewer(false);
-            setOpen(true);
-          }}
-        />
-      )}
+    <>
+    {openPDFViewer && (
+      <PdfViewer
+        fileURL={activePdfUrl}
+        closePreview={() => {
+          setOpenPDFViewer(false);
+          setOpen(true);
+        }}
+      />
+    )}
+    { !openPDFViewer && (<div className="overlay">
+        <button type="button" className="overlay-close" onClick={e => removeOverlay()}/>
       {open && (
         <div>
           <div className="pdf-flex-item">
@@ -76,7 +74,8 @@ function PdfCarousel({ documents, removeOverlay, pdfSlice }) {
           </div>
         </div>
       )}
-    </div>
+    </div>)}
+    </>
   );
 }
 

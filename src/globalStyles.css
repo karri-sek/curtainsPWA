@@ -49,21 +49,42 @@ div#iframe-wrapper iframe {
   display: none;
 }
 
-.overlay .pdfIframeContainer{
-    display: flex;
-    margin: 0 auto;
-    align-items: center;
-    vertical-align: middle;
-    justify-content: center;
-    position: absolute;
-    width: 100vh;
-    height: 100%;
+
+.pdf-display-overlay {
+  position: absolute; /* Sit on top of the page content */
+  display: flex; /* Hidden by default */
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  background-color: rgba(0,0,0,0.9); /* Black background with opacity */
+  cursor: pointer; /* Add a pointer on hover */
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
 }
 
-.overlay .pdfIframeContainer{
-   
-    width: 100%;
+
+.doc-pdf-viewer-item{
+  display: flex;
+  background-color: yellow;
+  margin: auto;
+  justify-content: center;
+
+  align-items: center;
 }
+.react-pdf__Page__annotations {
+  display: none;
+}
+.controls-pdf-viewer-item{
+ background-color: white;
+}
+
+.pdf-viewer-item{
+  background-color: red;
+}
+
+
 
 .iframe-video-div{
     left: 25%;
