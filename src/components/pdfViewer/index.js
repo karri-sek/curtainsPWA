@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 function PdfViewer({ fileURL, closePreview }) {
-  console.log(" hiiiiiiii23233", isMobile)
     if (isMobile) {
-      console.log(" hiii ")
         const [numPages, setNumPages] = useState(null);
         const [pageNumber, setPageNumber] = useState(1);
 
@@ -25,7 +23,7 @@ function PdfViewer({ fileURL, closePreview }) {
             changePage(1);
         }
         return (
-            <>
+            <><div className="overlay">
                 <button
                     type="button"
                     className="pdf-viewer-item"
@@ -34,20 +32,19 @@ function PdfViewer({ fileURL, closePreview }) {
                 >
                     Close
                 </button>
-
-                <Document className="doc-pdf-viewer-item" file={fileURL} onLoadSuccess={onDocumentLoadSuccess}>
+                
+                <Document  file={fileURL} onLoadSuccess={onDocumentLoadSuccess}>
                     <Page pageNumber={pageNumber} />
                 </Document>
-                <div className="controls-pdf-viewer-item">
-                    <p>
-                        Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-                    </p>
-                    <button type="button" disabled={pageNumber <= 1} onClick={previousPage}>
+                <div className="controls">
+                   
+                    <button type="button" style={{marginRight:"15px"}}disabled={pageNumber <= 1} onClick={previousPage}>
                         Previous
                     </button>
                     <button type="button" disabled={pageNumber >= numPages} onClick={nextPage}>
                         Next
                     </button>
+                </div>
                 </div>
             </>
         );
@@ -61,7 +58,7 @@ function PdfViewer({ fileURL, closePreview }) {
                 <div className="scroll-wrapper">
                     <iframe title="image" src={fileURL} frameBorder="0" allowFullScreen />
                 </div>
-            </>
+                </>
         );
     }
 }
